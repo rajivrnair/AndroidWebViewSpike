@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>WebSocket Test</title>
+        <script src="js/websocket.js">
+        </script>
+        <script language="javascript" type="text/javascript">
+            var wsUri = "ws://echo.websocket.org/";
+            var output, websocket;
+            function init() {
+                output = document.getElementById("output");
+                setupSocket();
+            }
+
+            function setupSocket() {
+                websocket = new WebSocket(wsUri);
+                websocket.onopen = function(evt) { onOpen(evt) };
+                websocket.onclose = function(evt) { onClose(evt) };
+                websocket.onmessage = function(evt) { onMessage(evt) };
+                websocket.onerror = function(evt) { onError(evt) };
+            }
+
+            function onOpen(evt) {
+                input= document.getElementById("input");
+                writeToScreen('<span style="color: green;">CONNECTED</span>');
+                doSend(input.value);
+            }
+
+            function onClose(evt) {
+                writeToScreen('<span style="color: gray;">DISCONNECTED</span>');
+            }
+
+            function closeChannel() {
+                websocket.close();
+            }
+
+            function onMessage(evt) {
+                writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+            }
+
+            function onError(evt) {
+                writeToScreen('<span style="color: red;">ERROR: ' + evt.data+'</span>');
+            }
+
+            function doSend(message) {
+                writeToScreen('<span style="color: orange;">SENDING: ' + input.value+'</span>');
+                websocket.send(message);
+            }
+
+            function sendMeg(){
+                input= document.getElementById("input");
+                doSend(input.value);
+            }
+
+            function writeToScreen(message) {
+                var pre = document.createElement("p");
+                pre.style.wordWrap = "break-word";
+                pre.innerHTML = message; output.appendChild(pre);
+            }
+
+            window.addEventListener("load", init, false);
+
+        </script>
+    </head>
+    <body>
+        <h2>WebSocket Test</h2>
+        <div>
+            This is a simple WebSocket test.<br/>The default server is the ws://echo.websocket.org/.<br/>
+            This follows the WebSocket example given <a href='http://www.websocket.org/echo.html'>here.</a>
+            <br/><br/>
+            Send a message:<input type="text" id="input" value="Winter is coming!!"/>
+            <br/>
+            <input type="button" id="sendms" value="send" onclick="sendMeg()">
+            <input type="button" id="closeChannel" value="close" onclick="closeChannel()">
+            <br/>
+            Don't forget to close the channel after you're done!
+        </div>
+
+        <div id="output"></div>
+    </body>
+</html>
