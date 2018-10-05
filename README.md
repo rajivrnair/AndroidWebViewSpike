@@ -2,9 +2,10 @@ Simple project to explore the capabilities of a WebView in Android.
 
 **TODO:**
 1. _WebSockets support. (DONE)_
-2. Show location on map.
-3. Camera for barcode scanner.
-4. Fingerprint Auth.
+2. _Load Lottie animation. (DONE)_
+3. Show location on map.
+4. Camera for barcode scanner.
+5. Fingerprint Auth.
 
 To run:
 - Use Android Studio (or)

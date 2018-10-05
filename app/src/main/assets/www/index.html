@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8"/>
         <title>WebSocket Test</title>
-        <script src="js/websocket.js">
-        </script>
+
+        <!-- Scripts -->
+        <script src="js/websocket.js"></script>
         <script language="javascript" type="text/javascript">
             var wsUri = "ws://echo.websocket.org/";
             var output, websocket;
             function init() {
-                output = document.getElementById("output");
+                output = document.getElementById("socketOutput");
                 setupSocket();
             }
 
@@ -64,6 +65,7 @@
         </script>
     </head>
     <body>
+        <div id="lottie" style="height:100px;width=50px;"></div>
         <h2>WebSocket Test</h2>
         <div>
             This is a simple WebSocket test.<br/>The default server is the ws://echo.websocket.org/.<br/>
@@ -77,6 +79,9 @@
             Don't forget to close the channel after you're done!
         </div>
 
-        <div id="output"></div>
+        <div id="socketOutput"></div>
+
+        <script src="js/bodymovin.js"></script>
+        <script src="js/animation.js"></script>
     </body>
 </html>
